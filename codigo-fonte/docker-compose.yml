@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  broker:
+    image: rabbitmq:3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=docker
+      - RABBITMQ_DEFAULT_PASS=docker
+    ports:
+      - "15671:15671"
+      - "15672:15672"
+      - "15691:15691"
+      - "15692:15692"
+      - "25672:25672"
+      - "4369:4369"
+      - "5671:5671"
+      - "5672:5672"
+
+  sells-service-db:
+    image: mysql:latest
+    restart: always
+    environment:
+      - "MYSQL_DATABASE=mysql"
+      - "MYSQL_PASSWORD=docker"
+      - "MYSQL_ROOT_PASSWORD=docker"
+      - "MYSQL_USER=docker"
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./db-dump/:/docker-entrypoint-initdb.d
