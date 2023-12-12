@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+  customers-service-api-db:
+    image: "mysql:latest"
+    container_name: customers-service-api-db
+    restart: always
+    environment:
+      - "MYSQL_DATABASE=mysql"
+      - "MYSQL_ROOT_PASSWORD=docker"
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db-dump/:/docker-entrypoint-initdb.d
+
+  customers-service-api:
+    build: ./customers-service-api/.
+    restart: always
+    ports:
+      - "8000:8080"
+    environment:
+      - "MYSQL_HOST=customers-service-api-db"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD=docker"
+      - "MYSQL_DATABASE=mysql"
+    command: java -jar target/customers_services_api-0.0.1-SNAPSHOT.jar
+    depends_on:
+      - customers-service-api-db
