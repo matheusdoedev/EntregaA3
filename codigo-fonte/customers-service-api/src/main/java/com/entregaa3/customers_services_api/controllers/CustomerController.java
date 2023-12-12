@@ -16,16 +16,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.entregaa3.customers_services_api.dto.CustomerDto;
 import com.entregaa3.customers_services_api.services.impl.CustomerServiceImpl;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 
 @RestController
 @RequestMapping("api/v1/customers")
+@Tag(name = "customers")
 @AllArgsConstructor
 public class CustomerController {
 
 	private final CustomerServiceImpl customerService;
 
 	@PostMapping("/create")
+	@Operation(summary = "Create a new customer.")
+	@ApiResponse(responseCode = "200", description = "Customer created.")
 	public ResponseEntity<CustomerDto> postCreateCustomer(@RequestBody CustomerDto customerDto) {
 		CustomerDto savedCustomer = this.customerService.createCustomer(customerDto);
 
@@ -33,6 +39,9 @@ public class CustomerController {
 	}
 
 	@PutMapping("/update/{customerId}")
+	@Operation(summary = "Update a customer.")
+	@ApiResponse(responseCode = "200", description = "Customer updated.")
+	@ApiResponse(responseCode = "404", description = "Customer not found.")
 	public ResponseEntity<CustomerDto> putUpdateCustomer(@PathVariable("customerId") UUID customerId,
 			@RequestBody CustomerDto customerDto) {
 		CustomerDto savedCustomer = this.customerService.updateCustomer(customerId, customerDto);
@@ -41,6 +50,8 @@ public class CustomerController {
 	}
 
 	@GetMapping("")
+	@Operation(summary = "List all customers.")
+	@ApiResponse(responseCode = "200", description = "Customers listed.")
 	public ResponseEntity<List<CustomerDto>> getAllCustomers() {
 		List<CustomerDto> customers = this.customerService.listCustomers();
 
@@ -48,6 +59,9 @@ public class CustomerController {
 	}
 
 	@GetMapping("{customerId}")
+	@Operation(summary = "Show a specific customer.")
+	@ApiResponse(responseCode = "200", description = "Customer found.")
+	@ApiResponse(responseCode = "404", description = "Customer not found.")
 	public ResponseEntity<CustomerDto> getCustomer(@PathVariable("customerId") UUID customerId) {
 		CustomerDto customer = this.customerService.showCustomer(customerId);
 
@@ -55,6 +69,9 @@ public class CustomerController {
 	}
 
 	@DeleteMapping("/delete/{customerId}")
+	@Operation(summary = "Delete a customer.")
+	@ApiResponse(responseCode = "200", description = "Customer deleted.")
+	@ApiResponse(responseCode = "404", description = "Customer not found.")
 	public ResponseEntity<String> deleteCustomer(@PathVariable("customerId") UUID customerId) {
 		this.customerService.deleteCustomer(customerId);
 

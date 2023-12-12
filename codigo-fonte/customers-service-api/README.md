@@ -54,6 +54,12 @@ docker run -d --port "8080:8080" --name customers-service-api customers-service-
 
 - Basta acessar o endpoint/path abaixo para acessar a documentação via Swagger que está configurado no projeto.
 
+- Se estiver executando todos os serviçõs do sistema com o docker-compose, utilize o endereço http://localhost:8000. Porém, se estiver executando somente esse serviço, basta utilizaro endereço http://localhost:8080.
+
 ```sh
-/swagger-ui/index.html#/
+http://localhost:8000/swagger-ui/index.html#/
+
+# ou
+
+http://localhost:8080/swagger-ui/index.html#/
 ```
