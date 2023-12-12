@@ -11,7 +11,7 @@ services:
     ports:
       - "3307:3306"
     volumes:
-      - ./db-dump/:/docker-entrypoint-initdb.d
+      - ./customers-service-api/db-dump/:/docker-entrypoint-initdb.d
 
   customers-service-api:
     build: ./customers-service-api/.
