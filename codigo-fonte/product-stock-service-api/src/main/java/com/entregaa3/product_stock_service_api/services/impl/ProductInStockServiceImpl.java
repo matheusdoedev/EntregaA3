@@ -7,7 +7,9 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import com.entregaa3.product_stock_service_api.dtos.CreateProductInStockInBatchDto;
 import com.entregaa3.product_stock_service_api.dtos.ProductInStockDto;
+import com.entregaa3.product_stock_service_api.enums.ProductInStockStatus;
 import com.entregaa3.product_stock_service_api.exceptions.ResourceNotFoundException;
 import com.entregaa3.product_stock_service_api.mappers.ProductInStockMapper;
 import com.entregaa3.product_stock_service_api.models.Product;
@@ -101,5 +103,46 @@ public class ProductInStockServiceImpl implements ProductInStockService {
 		}
 
 		return productsInStockDto;
+	}
+
+	@Override
+	public List<ProductInStockDto> listProductsInStockAvailableToBeSold(UUID productId) {
+		List<ProductInStock> productsInStockAvailable = this.productInStockRepository.findByProductIdAndStatus(
+				productId,
+				ProductInStockStatus.PENDING);
+		List<ProductInStockDto> productsInStockDto = new ArrayList<>();
+
+		for (ProductInStock productInStock : productsInStockAvailable) {
+			productsInStockDto.add(ProductInStockMapper.parseToDto(productInStock));
+		}
+
+		return productsInStockDto;
+	}
+
+	@Override
+	public List<ProductInStockDto> createProductInStockInBatch(
+			CreateProductInStockInBatchDto createProductInStockInBatchDto) {
+
+		UUID productId = createProductInStockInBatchDto.getProductId();
+		Optional<Product> product = this.productRepository.findById(productId);
+		List<ProductInStockDto> productsInStockSavedDto = new ArrayList<>();
+
+		if (!product.isPresent()) {
+			throw new ResourceNotFoundException("Product", "id", productId.toString());
+		}
+
+		for (int count = 0; count < createProductInStockInBatchDto.getQuantity(); count++) {
+			ProductInStock productInStock = new ProductInStock();
+
+			productInStock.setId(UUID.randomUUID());
+			productInStock.setProduct(product.get());
+			productInStock.setStatus(ProductInStockStatus.PENDING);
+
+			this.productInStockRepository.save(productInStock);
+
+			productsInStockSavedDto.add(ProductInStockMapper.parseToDto(productInStock));
+		}
+
+		return productsInStockSavedDto;
 	}
 }

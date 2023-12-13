@@ -2,7 +2,7 @@
 
 - Um SOA (Arquitetura Orientada a Serviços) desenvolvida utilizando APIs e o padrão REST com o protocolo HTTP para a comunicação entre os serviços;
 
-- Também foi implementado o design pattern API Gateway com Node.js com a ideia de rotear o acesso do cliente aos serviços que compoem o SOA;
+- Também foi implementado o design pattern API Gateway com Node.js, com a ideia de rotear o acesso do cliente aos serviços que compoem o SOA;
 
 - A arquitetura é composta de quatro serviços (fora o API Gateway). São eles:
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.entregaa3.product_stock_service_api.dtos.CreateProductInStockInBatchDto;
 import com.entregaa3.product_stock_service_api.dtos.ProductInStockDto;
 import com.entregaa3.product_stock_service_api.services.impl.ProductInStockServiceImpl;
 
@@ -38,6 +39,17 @@ public class ProductInStockController {
 		return ResponseEntity.ok(savedProductInStockDto);
 	}
 
+	@PostMapping("/create-in-batch")
+	@Operation(summary = "Create a new product in stock in batch.")
+	@ApiResponse(responseCode = "200", description = "All products was created succesfully.")
+	public ResponseEntity<List<ProductInStockDto>> postCreateProductInStockInBatch(
+			@RequestBody CreateProductInStockInBatchDto createProductInStockInBatchDto) {
+		List<ProductInStockDto> savedProductInStock = this.productInStockService
+				.createProductInStockInBatch(createProductInStockInBatchDto);
+
+		return ResponseEntity.ok(savedProductInStock);
+	}
+
 	@PutMapping("/update/{productInStockId}")
 	@Operation(summary = "Update a product in stock.")
 	@ApiResponse(responseCode = "200", description = "Product in stock updated.")
@@ -56,6 +68,17 @@ public class ProductInStockController {
 	@ApiResponse(responseCode = "200", description = "Products in stock listed.")
 	public ResponseEntity<List<ProductInStockDto>> getAllProductsInStock() {
 		List<ProductInStockDto> productsInStock = this.productInStockService.listProductsInStock();
+
+		return ResponseEntity.ok(productsInStock);
+	}
+
+	@GetMapping("/available/{productId}")
+	@Operation(summary = "It gets all available products from a specific product that can be sold.")
+	@ApiResponse(responseCode = "200", description = "Products in stock listed.")
+	public ResponseEntity<List<ProductInStockDto>> getAllProductsInStockAvailable(
+			@PathVariable("productId") UUID productId) {
+		List<ProductInStockDto> productsInStock = this.productInStockService
+				.listProductsInStockAvailableToBeSold(productId);
 
 		return ResponseEntity.ok(productsInStock);
 	}
