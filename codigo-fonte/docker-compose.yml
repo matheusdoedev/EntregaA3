@@ -27,6 +27,32 @@ services:
     depends_on:
       - customers-service-api-db
 
+  product-stock-service-db:
+    image: "mysql:latest"
+    container_name: product-stock-service-db
+    restart: always
+    environment:
+      - "MYSQL_DATABASE=mysql"
+      - "MYSQL_ROOT_PASSWORD=docker"
+    ports:
+      - "3308:3306"
+    volumes:
+      - ./product-stock-service-api/db-dump/:/docker-entrypoint-initdb.d
+
+  product-stock-service-api:
+    build: ./product-stock-service-api/.
+    restart: always
+    ports:
+      - "8001:8080"
+    environment:
+      - "MYSQL_HOST=product-stock-service-db"
+      - "MYSQL_USER=root"
+      - "MYSQL_PASSWORD=docker"
+      - "MYSQL_DATABASE=mysql"
+    command: java -jar target/product_stock_service_api-0.0.1-SNAPSHOT.jar
+    depends_on:
+      - product-stock-service-db
+
   api-gateway:
     build: ./api-gateway/.
     restart: always
@@ -38,3 +64,4 @@ services:
     command: npm run dev
     depends_on:
       - customers-service-api
+      - product-stock-service-api
