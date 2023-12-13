@@ -1,11 +1,10 @@
-# build stage
-FROM eclipse-temurin:17-jdk-jammy
+FROM node:20-alpine AS build
 
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN ./mvnw clean package
+RUN npm install
 
-EXPOSE 8080
-CMD [ "java", "-jar", "target/sells-service-api-0.0.1-SNAPSHOT.jar" ]
+EXPOSE 3000
+CMD [ "npm", "start" ]

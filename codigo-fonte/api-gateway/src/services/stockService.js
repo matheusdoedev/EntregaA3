@@ -31,6 +31,13 @@ export const stockService = {
     return stockServiceAPI.post("/product-in-stock/create", productInStockDto);
   },
 
+  createProductInStockInBatch(createProductInStockInBatchDto) {
+    return stockServiceAPI.post(
+      "/product-in-stock/create-in-batch",
+      createProductInStockInBatchDto
+    );
+  },
+
   updateProductInStock(productInStockId, productInStockDto) {
     return stockServiceAPI.put(
       `/product-in-stock/update/${productInStockId}`,
@@ -40,6 +47,10 @@ export const stockService = {
 
   getProductInStock(productInStockId) {
     return stockServiceAPI.get(`/product-in-stock/${productInStockId}`);
+  },
+
+  getProductsInStockAvailableToBeSold(productId) {
+    return stockServiceAPI.get(`/product-in-stock/available/${productId}`);
   },
 
   listProductsInStock() {

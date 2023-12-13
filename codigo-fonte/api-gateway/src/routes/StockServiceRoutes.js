@@ -33,6 +33,11 @@ StockServiceRouter.post(
   StockServiceController.postCreateProductInStock
 );
 
+StockServiceRouter.post(
+  "/product-in-stock/create-in-batch",
+  StockServiceController.postCreateProductInStockInBatch
+);
+
 StockServiceRouter.put(
   "/product-in-stock/update/:productInStockId",
   StockServiceController.putUpdateProductInStock
@@ -46,6 +51,11 @@ StockServiceRouter.get(
 StockServiceRouter.get(
   "/product-in-stock",
   StockServiceController.getProductsInStock
+);
+
+StockServiceRouter.get(
+  "/product-in-stock/available/:productId",
+  StockServiceController.getProductInStockAvailableToBeSold
 );
 
 StockServiceRouter.delete(

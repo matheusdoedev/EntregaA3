@@ -66,6 +66,16 @@ export default class StockServiceController {
     }
   }
 
+  static async postCreateProductInStockInBatch(req, res) {
+    try {
+      const response = await stockService.createProductInStockInBatch(req.body);
+
+      return res.status(response.status).json(response.data);
+    } catch (error) {
+      return res.status(error.response.status).json(error.response.data);
+    }
+  }
+
   static async putUpdateProductInStock(req, res) {
     try {
       const response = await stockService.updateProductInStock(
@@ -83,6 +93,18 @@ export default class StockServiceController {
     try {
       const response = await stockService.getProductInStock(
         req.params.productInStockId
+      );
+
+      return res.status(response.status).json(response.data);
+    } catch (error) {
+      return res.status(error.response.status).json(error.response.data);
+    }
+  }
+
+  static async getProductInStockAvailableToBeSold(req, res) {
+    try {
+      const response = await stockService.getProductsInStockAvailableToBeSold(
+        req.params.productId
       );
 
       return res.status(response.status).json(response.data);
