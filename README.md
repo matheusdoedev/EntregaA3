@@ -2,7 +2,7 @@
 
 - Um SOA (Arquitetura Orientada a Serviços) desenvolvida utilizando APIs e o padrão REST com o protocolo HTTP para a comunicação entre os serviços;
 
-- Também foi implementado o design pattern API Gateway com Node.js, com a ideia de rotear o acesso do cliente aos serviços que compoem o SOA;
+- Também foi implementado o design pattern API Gateway com Node.js, com a ideia de rotear o acesso do cliente aos serviços que compõem o SOA;
 
 - A arquitetura é composta de quatro serviços (fora o API Gateway). São eles:
 
@@ -10,11 +10,11 @@
   - Serviço de estoque (product-stock-service-api);
   - Serviço de vendas/transacional (sells-service-api);
 
-- Os frameworks Spring (Java) e Express (Node.js) foram utilizados no desenvolvimento dos serviços. O critério na escolha das tecnologias foi de acordo com o que era mais confortável aos desenvolvedores, já que o conceito de SOA é agnóstico ao tipo de plataforma/tecnologia que está sendo utilizado no desenvolvimento;
+- Os frameworks Spring (Java) e Express (Node.js) foram utilizados no desenvolvimento dos serviços. O critério na escolha das tecnologias foiconforme o que era mais confortável aos desenvolvedores, já que o conceito de SOA é agnóstico ao tipo de plataforma/tecnologia que está sendo utilizado no desenvolvimento;
 
 - Um ponto a se destacar é que a utilização de mais de uma tecnologia no desenvolvimento dos diferentes serviços mostra a heterogeneidade em um Sistema Distribuído;
 
-- Por fim, esse trabalho foi feito como um entregavél da avaliação A3 da cadeira de Sistemas Distríbuidos.
+- Por fim, esse trabalho foi feito como requisito da avaliação A3 da cadeira de Sistemas Distribuídos.
 
 ## Arquitetura
 
