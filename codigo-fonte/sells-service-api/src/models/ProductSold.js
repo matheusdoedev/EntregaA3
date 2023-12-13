@@ -1,21 +1,9 @@
-const { DataTypes } = require("sequelize");
+const { v4: uuidv4 } = require("uuid");
 
-const sequelize = require("../config/database");
-const Sell = require("./Sell");
-
-const ProductSold = sequelize.define("ProductSold", {
-  id: {
-    type: DataTypes.UUID,
-    allowNull: false,
-    primaryKey: true,
-  },
-
-  productInStockId: {
-    type: DataTypes.UUID,
-    allowNull: false,
-  },
-});
-
-ProductSold.belongsTo(Sell);
-
-module.exports = ProductSold;
+module.exports = class ProductSold {
+  constructor(productInStockId, sellId) {
+    this.id = uuidv4();
+    this.productInStockId = productInStockId;
+    this.sellId = sellId;
+  }
+};

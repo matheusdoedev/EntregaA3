@@ -4,7 +4,7 @@ const apiGatewayServiceAPI = httpProvider(process.env.API_GATEWAY_URL);
 
 const apiGatewayService = {
   getConsumer(consumerId) {
-    return apiGatewayServiceAPI.get(`/consumers/${consumerId}`);
+    return apiGatewayServiceAPI.get(`/customers/${consumerId}`);
   },
 
   getProduct(productId) {
@@ -16,6 +16,10 @@ const apiGatewayService = {
       `/product-in-stock/update/${productInStockId}`,
       productInStockDto
     );
+  },
+
+  getProductsInStockAvailableToBeSold(productId) {
+    return apiGatewayServiceAPI.get(`/product-in-stock/available/${productId}`);
   },
 };
 

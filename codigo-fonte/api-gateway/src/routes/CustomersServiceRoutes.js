@@ -15,7 +15,7 @@ CustomersServiceRouter.put(
 );
 
 CustomersServiceRouter.get(
-  "/customers/:customerID",
+  "/customers/:customerId",
   CustomersServiceController.getCustomer
 );
 

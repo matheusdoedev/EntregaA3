@@ -27,7 +27,7 @@ export default class CustomersServiceController {
   static async getCustomer(req, res) {
     try {
       const response = await customersService.getCustomer(
-        req.params.customerID
+        req.params.customerId
       );
 
       return res.status(response.status).json(response.data);

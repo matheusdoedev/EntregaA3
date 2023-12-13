@@ -53,6 +53,35 @@ services:
     depends_on:
       - product-stock-service-db
 
+  sells-service-db:
+    image: "mysql:latest"
+    container_name: sells-service-db
+    restart: always
+    environment:
+      - "MYSQL_DATABASE=mysql"
+      - "MYSQL_ROOT_PASSWORD=docker"
+    ports:
+      - "3309:3306"
+    volumes:
+      - ./sells-service-api/db-dump/:/docker-entrypoint-initdb.d
+
+  sells-service-api:
+    build: ./sells-service-api/.
+    restart: always
+    ports:
+      - "3001:3000"
+    environment:
+      - "PORT=3000"
+      - "API_GATEWAY_URL=http://api-gateway:3000"
+      - "DB_HOST=sells-service-db"
+      - "DB_USER=root"
+      - "DB_PASSWORD=docker"
+      - "DB_DATABASE=mysql"
+      - "DB_PORT=3306"
+    command: npm start
+    depends_on:
+      - sells-service-db
+
   api-gateway:
     build: ./api-gateway/.
     restart: always
@@ -62,7 +91,8 @@ services:
       - "PORT=3000"
       - "CUSTOMERS_SERVICE_API_URL=http://customers-service-api:8080/api/v1"
       - "PRODUCT_STOCK_SERVICE_API_URL=http://product-stock-service-api:8080/api/v1"
-    command: npm run dev
+    command: npm start
     depends_on:
       - customers-service-api
       - product-stock-service-api
+      - sells-service-api
