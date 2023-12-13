@@ -91,6 +91,7 @@ services:
       - "PORT=3000"
       - "CUSTOMERS_SERVICE_API_URL=http://customers-service-api:8080/api/v1"
       - "PRODUCT_STOCK_SERVICE_API_URL=http://product-stock-service-api:8080/api/v1"
+      - "SELLS_SERVICE_API_URL=http://sells-service-api:3000"
     command: npm start
     depends_on:
       - customers-service-api
