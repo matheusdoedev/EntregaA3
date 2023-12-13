@@ -9,7 +9,6 @@
   - Serviço de clientes (consumers-service-api);
   - Serviço de estoque (product-stock-service-api);
   - Serviço de vendas/transacional (sells-service-api);
-  - Serviço de analytics/relátorios (analytics-service-api);
 
 - Os frameworks Spring (Java) e Express (Node.js) foram utilizados no desenvolvimento dos serviços. O critério na escolha das tecnologias foi de acordo com o que era mais confortável aos desenvolvedores, já que o conceito de SOA é agnóstico ao tipo de plataforma/tecnologia que está sendo utilizado no desenvolvimento;
 
@@ -19,9 +18,29 @@
 
 ## Arquitetura
 
-## Instalando projeto
+![Arquitetura](./.github/soa-architecture-picture.jpg)
+
+## Instalando o projeto
+
+### 1. Clonando o projeto
+
+```sh
+git clone git@github.com:matheusdoedev/todo-list-manager-api.git
+```
 
 ## Executando o sistema
+
+### 0. Docker e Docker Compose
+
+- É necessário baixar e instalar o Docker e o Docker Compose para executar o sistema.
+
+### 1. Executando o sistema
+
+```sh
+cd codigo fonte
+
+docker-compose -d --build up
+```
 
 ## Documentação
 

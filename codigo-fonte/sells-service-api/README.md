@@ -2,6 +2,14 @@
 
 - API de vendas feita em Node.js com Express;
 
+## Instalando o projeto
+
+### 1. Clonando o projeto
+
+```sh
+git clone git@github.com:matheusdoedev/todo-list-manager-api.git
+```
+
 ## Executando o projeto
 
 ### 0. Instalando depêndencias

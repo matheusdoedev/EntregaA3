@@ -4,6 +4,14 @@
 
 - A ideia dessa API é implementar o design pattern API Gateway, onde ele irar rotear as chamadas que vem dos clientes para os serviços que compoem o SOA.
 
+## Instalando o projeto
+
+### 1. Clonando o projeto
+
+```sh
+git clone git@github.com:matheusdoedev/todo-list-manager-api.git
+```
+
 ## Executando o projeto
 
 ### 0. Instalando depêndencias
