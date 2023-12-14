@@ -4,7 +4,7 @@
 
 - Também foi implementado o design pattern API Gateway com Node.js, com a ideia de rotear o acesso do cliente aos serviços que compõem o SOA;
 
-- A arquitetura é composta de quatro serviços (fora o API Gateway). São eles:
+- A arquitetura é composta de três serviços (fora o API Gateway). São eles:
 
   - Serviço de clientes (consumers-service-api);
   - Serviço de estoque (product-stock-service-api);
