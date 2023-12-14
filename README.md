@@ -10,7 +10,7 @@
   - Serviço de estoque (product-stock-service-api);
   - Serviço de vendas/transacional (sells-service-api);
 
-- Os frameworks Spring (Java) e Express (Node.js) foram utilizados no desenvolvimento dos serviços. O critério na escolha das tecnologias foiconforme o que era mais confortável aos desenvolvedores, já que o conceito de SOA é agnóstico ao tipo de plataforma/tecnologia que está sendo utilizado no desenvolvimento;
+- Os frameworks Spring (Java) e Express (Node.js) foram utilizados no desenvolvimento dos serviços. O critério na escolha das tecnologias foi conforme o que era mais confortável aos desenvolvedores, já que o conceito de SOA é agnóstico ao tipo de plataforma/tecnologia que está sendo utilizado no desenvolvimento;
 
 - Um ponto a se destacar é que a utilização de mais de uma tecnologia no desenvolvimento dos diferentes serviços mostra a heterogeneidade em um Sistema Distribuído;
 
