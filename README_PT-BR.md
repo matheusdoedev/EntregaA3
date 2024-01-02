@@ -1,4 +1,4 @@
-# Entrega A3
+# Store Software With SOA
 
 - Um SOA (Arquitetura Orientada a Serviços) desenvolvida utilizando APIs e o padrão REST com o protocolo HTTP para a comunicação entre os serviços;
 
