@@ -1,5 +1,11 @@
 const db = require("./config");
 
+const handleQueryCallback = (message, postAction) => (error) => {
+  if (error) throw error;
+  if (message) console.log(message);
+  if (postAction) postAction();
+};
+
 const createTables = () => {
   db.query(
     `
@@ -10,10 +16,7 @@ const createTables = () => {
 			  quantity int NOT NULL
 		  );
 	  `,
-    (error) => {
-      if (error) throw error;
-      console.log("Sells table created.");
-    }
+    handleQueryCallback("Sells table created.")
   );
 
   db.query(
@@ -24,11 +27,9 @@ const createTables = () => {
 			  sellId varchar(40) NOT NULL REFERENCES mysql.sells(id) ON DELETE CASCADE
 		  );
 	  `,
-    (error) => {
-      if (error) throw error;
-      console.log("ProductSolds table created.");
+    handleQueryCallback("ProductSolds table created.", () => {
       process.exit();
-    }
+    })
   );
 };
 
@@ -37,10 +38,7 @@ const initDatabase = () => {
     `
 		  CREATE DATABASE IF NOT EXISTS mysql;
 	  `,
-    (error) => {
-      if (error) throw error;
-      console.log("Database created.");
-    }
+    handleQueryCallback("Database created.")
   );
 
   createTables();
