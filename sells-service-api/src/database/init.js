@@ -1,16 +1,6 @@
 const db = require("./config");
 
-const initDatabase = () => {
-  db.query(
-    `
-		  CREATE DATABASE IF NOT EXISTS mysql;
-	  `,
-    (error, result) => {
-      if (error) throw error;
-      console.log("Database created.");
-    }
-  );
-
+const createTables = () => {
   db.query(
     `
 		  CREATE TABLE IF NOT EXISTS mysql.sells (
@@ -20,7 +10,7 @@ const initDatabase = () => {
 			  quantity int NOT NULL
 		  );
 	  `,
-    (error, result) => {
+    (error) => {
       if (error) throw error;
       console.log("Sells table created.");
     }
@@ -34,12 +24,26 @@ const initDatabase = () => {
 			  sellId varchar(40) NOT NULL REFERENCES mysql.sells(id) ON DELETE CASCADE
 		  );
 	  `,
-    (error, result) => {
+    (error) => {
       if (error) throw error;
       console.log("ProductSolds table created.");
       process.exit();
     }
   );
+};
+
+const initDatabase = () => {
+  db.query(
+    `
+		  CREATE DATABASE IF NOT EXISTS mysql;
+	  `,
+    (error) => {
+      if (error) throw error;
+      console.log("Database created.");
+    }
+  );
+
+  createTables();
 };
 
 initDatabase();
