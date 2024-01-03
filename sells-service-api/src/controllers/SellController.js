@@ -3,22 +3,22 @@ const SellDAO = require("../dao/SellDao");
 const DontHaveEnoughProductsError = require("../exceptions/DontHaveEnoughProductsError");
 const ProductSold = require("../models/ProductSold");
 const Sell = require("../models/Sell");
-
 const apiGatewayService = require("../services/apiGatewayService");
 
 class SellController {
   static async postSell(req, res) {
     try {
       const { customerId, productId, quantity } = req.body;
-      const sellDto = new Sell(customerId, productId, quantity);
 
-      // validar se o cliente existe
+      // check if customer exists
       await apiGatewayService.getConsumer(customerId);
 
-      // validar se o produto existe
+      // check if product exists
       await apiGatewayService.getProduct(productId);
 
-      // validar se a quantidade de unidades desse produto suficientes do estoque para realizar a venda
+      const sellDto = new Sell(customerId, productId, quantity);
+
+      // check if have enough product quantity to sell
       const { data: availableProducts } =
         await apiGatewayService.getProductsInStockAvailableToBeSold(productId);
 
@@ -26,27 +26,13 @@ class SellController {
         throw new DontHaveEnoughProductsError();
       }
 
-      if (availableProducts.length >= quantity) {
-        // se sim, cria a venda no banco, relaciona os produtos que estão no stock que vão ser vendidos com a venda, e atualiza o status dos produtos no stock vendidos
-        await SellDAO.create(sellDto);
-
-        for (let count = 0; count < quantity; count++) {
-          const { id } = availableProducts[count];
-
-          const productSoldDto = new ProductSold(id, sellDto.id);
-
-          await ProductSoldDAO.create(productSoldDto);
-
-          await apiGatewayService.updateProductInStock(id, {
-            status: "SELLED",
-          });
-        }
-
-        return res.status(200).json({ message: "Venda realizada", sellDto });
-      } else {
-        // se não, dispara uma exceção informando que não há produtos suficientes no estoque para realizar a venda
+      if (availableProducts.length < quantity) {
         throw new DontHaveEnoughProductsError();
       }
+
+      await handleRegisterProductsInStockToSell(sellDto, availableProducts);
+
+      return res.status(200).json({ message: "Venda realizada", sellDto });
     } catch (error) {
       const errorMessage =
         error?.message ??
@@ -55,6 +41,23 @@ class SellController {
 
       console.error(error);
       return res.status(400).json({ message: errorMessage, error });
+    }
+  }
+
+  async handleRegisterProductsInStockToSell(sellDto, availableProducts) {
+    // if is, creates the sell, the relation between the products in stock with the sell, and updates products in stock to 'SELLED'
+    await SellDAO.create(sellDto);
+
+    for (let count = 0; count < quantity; count++) {
+      const { id } = availableProducts[count];
+
+      const productSoldDto = new ProductSold(id, sellDto.id);
+
+      await ProductSoldDAO.create(productSoldDto);
+
+      await apiGatewayService.updateProductInStock(id, {
+        status: "SELLED",
+      });
     }
   }
 }
