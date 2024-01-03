@@ -51,8 +51,8 @@ docker-compose -d --build up
 
 ### APIs (Services)
 
-- [API Gateway](./api-gateway/README.md)
-- [consumers-service-apicodigo-fonte/customers-service-api/README.md)
+- [api-gateway](./api-gateway/README.md)
+- [consumers-service-api](./customers-service-api/README.md)
 - [product-stock-service-api](./product-stock-service-api/README.md)
 - [sells-service-api](./sells-service-api/README.md)
 
