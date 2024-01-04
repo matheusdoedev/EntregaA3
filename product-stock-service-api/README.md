@@ -1,42 +1,30 @@
 # Product Stock Service API
 
-- API com o CRUD de produtos e controle de estoque da loja;
+- API with products CRUD and store stock control;
 
-- Foi desenvolvido em Java com o Spring framework e o MySQL;
+- It was made with Java and Spring.
 
-## Instalando o projeto
+## Executing (with Docker)
 
-### 1. Clonando o projeto
-
-```sh
-git clone git@github.com:matheusdoedev/todo-list-manager-api.git
-```
-
-## Executando o projeto (com o Docker)
-
-### 0. Instalação do Docker
-
-- É preciso instalar o Docker na máquina antes de prosseguir com os próximos passos.
-
-### 1. Iniciando o MySQL com o Docker
+### 0. Running MySQL with Docker
 
 ```sh
 docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=docker-d mysql:latest
 ```
 
-### 2. Buildando a imagem do projeto
+### 1. Building the API image
 
 ```sh
 docker build -t product-stock-service-api .
 ```
 
-### 3. Subindo o container
+### 2. Running container
 
 ```sh
 docker run -d --port "8080:8080" --name product-stock-service-api product-stock-service-api
 ```
 
-## Tecnologias utilizadas
+## Technologies
 
 - Java
 - Spring
@@ -48,13 +36,13 @@ docker run -d --port "8080:8080" --name product-stock-service-api product-stock-
 - Lombok
 - Dockerfile
 
-## Documentação da API
+## API Docs
 
 ### SpringDoc API (Swagger)
 
-- Basta acessar o endpoint/path abaixo para acessar a documentação via Swagger que está configurado no projeto.
+- You only have to access the endpoint/path below to access the API documentation through Swagger.
 
-- Se estiver executando todos os serviçõs do sistema com o docker-compose, utilize o endereço http://localhost:8001. Porém, se estiver executando somente esse serviço, basta utilizaro endereço http://localhost:8080.
+- If you are executing all services together with docker-compose, use http://localhost:8001. However, if you are executing only this service, use http://localhost:8080.
 
 ```sh
 http://localhost:8001/swagger-ui/index.html#/

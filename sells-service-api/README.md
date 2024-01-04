@@ -2,17 +2,11 @@
 
 - API de vendas feita em Node.js com Express;
 
-## Instalando o projeto
+- Sells API made in Node.js with Express.
 
-### 1. Clonando o projeto
+## Executing the API
 
-```sh
-git clone git@github.com:matheusdoedev/todo-list-manager-api.git
-```
-
-## Executando o projeto
-
-### 0. Instalando depêndencias
+### 0. Installing dependencies
 
 ```sh
 npm install
@@ -20,7 +14,7 @@ npm install
 yarn
 ```
 
-### 1. Subindo o projeto
+### 1. Running
 
 ```sh
 npm run dev
@@ -34,15 +28,15 @@ npm start
 yarn start
 ```
 
-## Technologias utilizadas
+## Technologies
 
 - Node.js
 - Express
 - Nodemon
 - Axios
 
-## Documentação
+## API Docs
 
 ### Insomnia
 
-- Para consultar a documentação da API é necessário instalar o Insomnia e importar o arquivo sells-service-api.json.
+- In order to look the API endpoints, it is necessary to download and install Insomnia and import sells-service-api.json that is in api root folder.

@@ -1,20 +1,12 @@
 # API Gateway
 
-- API REST feita em Node.js com Express;
+- RESTful API made in Node.js with Express;
 
-- A ideia dessa API é implementar o design pattern API Gateway, onde ele irar rotear as chamadas que vem dos clientes para os serviços que compoem o SOA.
+- This API goal is to implement API Gateway design pattern.
 
-## Instalando o projeto
+## Executing
 
-### 1. Clonando o projeto
-
-```sh
-git clone git@github.com:matheusdoedev/todo-list-manager-api.git
-```
-
-## Executando o projeto
-
-### 0. Instalando depêndencias
+### 0. Installing dependencies
 
 ```sh
 npm install
@@ -22,7 +14,7 @@ npm install
 yarn
 ```
 
-### 1. Subindo o projeto
+### 1. Running
 
 ```sh
 npm run dev
@@ -36,15 +28,15 @@ npm start
 yarn start
 ```
 
-## Technologias utilizadas
+## Technologies
 
 - Node.js
 - Express
 - Nodemon
 - Axios
 
-## Documentação
+## Docs
 
 ### Insomnia
 
-- Para consultar a documentação da API é necessário instalar o Insomnia e importar o arquivo api-gateway.json.
+- In order to look the API endpoints, it is necessary to download and install Insomnia and import api-gateway.json that is in api root folder.
