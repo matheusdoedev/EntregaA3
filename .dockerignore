@@ -1,0 +1,5 @@
+db-dump
+node_modules
+.tool-versions
+.vscode
+HELP.md
